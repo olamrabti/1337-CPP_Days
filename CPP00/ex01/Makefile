@@ -1,9 +1,9 @@
 
 
-NAME = megaphone
+NAME = program
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = megaphone.cpp
+SRC = main.cpp Contact.class.cpp PhoneBook.class.cpp
 
 all: $(NAME)
 
