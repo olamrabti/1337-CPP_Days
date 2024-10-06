@@ -3,18 +3,23 @@
 
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include "Contact.class.hpp"
 
 class PhoneBook
 {
 private:
-    Contact contact[8];
+    Contact _contact[8];
+    size_t _last_index;
 
 public:
     PhoneBook();
     ~PhoneBook();
     void add_contact(Contact contact);
     void search_contact(void);
+    void print_contact(Contact contact) const;
+    size_t get_last_index(void) const;
+    void set_last_index();
 };
 
 #endif

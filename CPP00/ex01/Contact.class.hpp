@@ -1,3 +1,4 @@
+
 #ifndef CONTACT_CLASS_HPP
 #define CONTACT_CLASS_HPP
 
@@ -6,12 +7,12 @@
 class Contact
 {
 private:
-    std::size_t index;
-    std::string first_name;
-    std::string last_name;
-    std::string nick_name;
-    std::string phone_number;
-    std::string darkest_secret;
+    std::size_t _index;
+    std::string _first_name;
+    std::string _last_name;
+    std::string _nick_name;
+    std::string _phone_number;
+    std::string _darkest_secret;
 
 public:
     void set_index(std::size_t index);
@@ -20,12 +21,12 @@ public:
     void set_nickname(std::string nickname);
     void set_phonenumber(std::string phonenum);
     void set_secret(std::string secret);
-    std::size_t get_index(void);
-    std::string get_firstname(void);
-    std::string get_lastname(void);
-    std::string get_nickname(void);
-    std::string get_phonenumber(void);
-    std::string get_secret(void);
+    std::size_t get_index(void) const;
+    std::string get_firstname(void) const;
+    std::string get_lastname(void) const;
+    std::string get_nickname(void) const;
+    std::string get_phonenumber(void) const;
+    std::string get_secret(void) const;
 };
 
 #endif
