@@ -2,58 +2,58 @@
 
 void Contact::set_firstname(std::string firstname)
 {
-    this->first_name = firstname;
+    this->_first_name = firstname;
 };
 void Contact::set_lastname(std::string lastname)
 {
-    this->last_name = lastname;
+    this->_last_name = lastname;
 };
 
 void Contact::set_nickname(std::string nickname)
 {
-    this->nick_name = nickname;
+    this->_nick_name = nickname;
 };
 
 void Contact::set_phonenumber(std::string phonenum)
 {
-    this->phone_number = phonenum;
+    this->_phone_number = phonenum;
 };
 
 void Contact::set_secret(std::string secret)
 {
-    this->darkest_secret = secret;
+    this->_darkest_secret = secret;
 };
 
 void Contact::set_index(std::size_t index)
 {
-    this->index = index;
+    this->_index = index;
 };
 
-std::string Contact::get_firstname(void)
+std::string Contact::get_firstname(void) const
 {
-    return this->first_name;
+    return this->_first_name;
 };
-std::string Contact::get_lastname(void)
+std::string Contact::get_lastname(void) const
 {
-    return this->last_name;
-};
-
-std::string Contact::get_nickname(void)
-{
-    return this->nick_name;
+    return this->_last_name;
 };
 
-std::string Contact::get_phonenumber(void)
+std::string Contact::get_nickname(void) const
 {
-
-    return this->phone_number;
+    return this->_nick_name;
 };
 
-std::string Contact::get_secret(void)
+std::string Contact::get_phonenumber(void) const
 {
-    return this->darkest_secret;
+
+    return this->_phone_number;
 };
-std::size_t Contact::get_index(void)
+
+std::string Contact::get_secret(void) const
 {
-    return this->index;
+    return this->_darkest_secret;
+};
+std::size_t Contact::get_index(void) const
+{
+    return this->_index;
 };
