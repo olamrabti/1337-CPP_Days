@@ -8,7 +8,7 @@ int main(int ac, char *av[])
         while (i < ac)
         {
             std::string arg = av[i];
-            for (std::size_t j = 0; j < arg.length(); j++) // NOTE : .length() is a member function of the std::string class.
+            for (std::size_t j = 0; j < arg.length(); j++)
                 std ::cout << (char)(toupper(arg[j]));
             i++;
         }
