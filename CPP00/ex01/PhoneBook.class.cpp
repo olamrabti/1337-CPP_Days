@@ -5,24 +5,51 @@ void PhoneBook::search_contact(void)
     size_t i = 0;
     std::string input;
 
+    std::cout << " ------------------------------------------- " << std::endl;
     std::cout << "|";
     std::cout << std::setw(10) << "Index" << "|"
               << std::setw(10) << "FirstName" << "|"
               << std::setw(10) << "LastName" << "|"
               << std::setw(10) << "Nickname" << "|" << std::endl;
     std::cout << " ------------------------------------------- " << std::endl;
-    while (i <= 8)
+    if (this->_contact[0].get_index() == 99)
+    {
+        std::cout << "            PHONEBOOK IS EMPTY " << std::endl
+                  << std::endl;
+        return;
+    }
+    while (i < 8)
         this->print_contact(this->_contact[i++]);
     std::cout << " ------------------------------------------- " << std::endl;
-    std::cout << " ENTER INDEX : " << std::endl;
-    std::getline(std::cin, input);
-    for (int j = 0; j < 9; j++)
+    while (1)
     {
-        if (j == std::atoi(input.c_str()))
-            this->print_contact(this->_contact[j]);
-        if (std::atoi(input.c_str()) >= 9)
+        std::cout << " ENTER INDEX : " << std::endl;
+        std::getline(std::cin, input);
+        if (input == "EXIT")
+            exit(0);
+        if (input.length() > 1 || std::atoi(input.c_str()) >= 8 || !std::isdigit(input[0]))
         {
-            std::cout << " Makayench had number" << std::endl;
+            if (!std::isdigit(input[0]))
+                std::cout << "INVALID : INPUT MUST BE A DIGIT" << std::endl;
+            else
+                std::cout << "INVALID : OUT OF RANGE (0 -> 7)" << std::endl;
+        }
+        else
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (j == std::atoi(input.c_str()))
+                {
+                    if (this->_contact[j].get_index() == 99)
+                        std::cout << "CONTACT NOT FOUND !" << std::endl;
+                    else
+                    {
+                        std::cout << " ------------------------------------------- " << std::endl;
+                        this->print_contact(this->_contact[j]);
+                        std::cout << " ------------------------------------------- " << std::endl;
+                    }
+                }
+            }
             break;
         }
     }
@@ -30,6 +57,8 @@ void PhoneBook::search_contact(void)
 
 void PhoneBook::print_contact(Contact contact) const
 {
+    if (contact.get_index() == 99)
+        return;
     std::cout << "|";
     std::cout << std::setw(10) << contact.get_index() << "|";
     if (contact.get_firstname().length() <= 10)
@@ -66,10 +95,7 @@ size_t PhoneBook::get_last_index(void) const
 
 void PhoneBook::set_last_index()
 {
-    if (this->_last_index < 8)
-        this->_last_index++;
-    else if (this->_last_index > 8)
-        this->_last_index = 0;
+    this->_last_index = (this->_last_index + 1) % 8;
 };
 
 void PhoneBook::add_contact(Contact contact)
@@ -119,10 +145,10 @@ void PhoneBook::add_contact(Contact contact)
 PhoneBook::PhoneBook()
 {
     this->_last_index = 0;
-    std::cout << "construtor is called" << std::endl;
+    std::cout << "PHONEBOOK 2.0" << std::endl;
 };
 
 PhoneBook::~PhoneBook()
 {
-    std::cout << "destrutor is called" << std::endl;
+    return;
 };

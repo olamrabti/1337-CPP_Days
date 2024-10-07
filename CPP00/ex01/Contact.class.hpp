@@ -15,6 +15,8 @@ private:
     std::string _darkest_secret;
 
 public:
+    Contact() : _index(99), _first_name(""), _last_name(""), _nick_name(""), _phone_number(""), _darkest_secret("") {};
+    ~Contact() {};
     void set_index(std::size_t index);
     void set_firstname(std::string firstname);
     void set_lastname(std::string lastname);
