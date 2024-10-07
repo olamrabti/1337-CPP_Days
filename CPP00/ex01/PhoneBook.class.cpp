@@ -1,8 +1,17 @@
 #include "PhoneBook.class.hpp"
 
+bool is_all_spaces(std::string str)
+{
+    for (size_t i = 0; i < str.length(); i++)
+    {
+        if (!std::isspace((char)str[i]))
+            return false;
+    }
+    return true;
+}
+
 void PhoneBook::search_contact(void)
 {
-    size_t i = 0;
     std::string input;
 
     std::cout << " ------------------------------------------- " << std::endl;
@@ -12,14 +21,7 @@ void PhoneBook::search_contact(void)
               << std::setw(10) << "LastName" << "|"
               << std::setw(10) << "Nickname" << "|" << std::endl;
     std::cout << " ------------------------------------------- " << std::endl;
-    if (this->_contact[0].get_index() == 99)
-    {
-        std::cout << "            PHONEBOOK IS EMPTY " << std::endl
-                  << std::endl;
-        return;
-    }
-    while (i < 8)
-        this->print_contact(this->_contact[i++]);
+    this->print_contacts();
     std::cout << " ------------------------------------------- " << std::endl;
     while (1)
     {
@@ -27,6 +29,11 @@ void PhoneBook::search_contact(void)
         std::getline(std::cin, input);
         if (input == "EXIT")
             exit(0);
+        if (std::cin.eof())
+        {
+            std::cout << std::endl;
+            break;
+        }
         if (input.length() > 1 || std::atoi(input.c_str()) >= 8 || !std::isdigit(input[0]))
         {
             if (!std::isdigit(input[0]))
@@ -44,8 +51,9 @@ void PhoneBook::search_contact(void)
                         std::cout << "CONTACT NOT FOUND !" << std::endl;
                     else
                     {
+                        std::cout << " \nSELECTED CONTACT :" << std::endl;
                         std::cout << " ------------------------------------------- " << std::endl;
-                        this->print_contact(this->_contact[j]);
+                        this->_contact[j].display_contact();
                         std::cout << " ------------------------------------------- " << std::endl;
                     }
                 }
@@ -55,37 +63,47 @@ void PhoneBook::search_contact(void)
     }
 }
 
-void PhoneBook::print_contact(Contact contact) const
+void PhoneBook::print_contacts(void) const
 {
-    if (contact.get_index() == 99)
+    if (this->_contact[0].get_index() == 99)
+    {
+        std::cout << "            PHONEBOOK IS EMPTY " << std::endl
+                  << std::endl;
         return;
-    std::cout << "|";
-    std::cout << std::setw(10) << contact.get_index() << "|";
-    if (contact.get_firstname().length() <= 10)
-        std::cout << std::setw(10) << contact.get_firstname() << "|";
-    else
-    {
-        for (int i = 0; i < 9; i++)
-            std::cout << contact.get_firstname()[i];
-        std::cout << "." << "|";
     }
-    if (contact.get_lastname().length() <= 10)
-        std::cout << std::setw(10) << contact.get_lastname() << "|";
-    else
+    for (int j = 0; j < 8; j++)
     {
-        for (int i = 0; i < 9; i++)
-            std::cout << contact.get_lastname()[i];
-        std::cout << "." << "|";
+
+        if (this->_contact[j].get_index() == 99)
+            return;
+        std::cout << "|";
+        std::cout << std::setw(10) << this->_contact[j].get_index() << "|";
+        if (this->_contact[j].get_firstname().length() <= 10)
+            std::cout << std::setw(10) << this->_contact[j].get_firstname() << "|";
+        else
+        {
+            for (int i = 0; i < 9; i++)
+                std::cout << this->_contact[j].get_firstname()[i];
+            std::cout << "." << "|";
+        }
+        if (this->_contact[j].get_lastname().length() <= 10)
+            std::cout << std::setw(10) << this->_contact[j].get_lastname() << "|";
+        else
+        {
+            for (int i = 0; i < 9; i++)
+                std::cout << this->_contact[j].get_lastname()[i];
+            std::cout << "." << "|";
+        }
+        if (this->_contact[j].get_nickname().length() <= 10)
+            std::cout << std::setw(10) << this->_contact[j].get_nickname() << "|";
+        else
+        {
+            for (int i = 0; i < 9; i++)
+                std::cout << this->_contact[j].get_nickname()[i];
+            std::cout << "." << "|";
+        }
+        std::cout << std::endl;
     }
-    if (contact.get_nickname().length() <= 10)
-        std::cout << std::setw(10) << contact.get_nickname() << "|";
-    else
-    {
-        for (int i = 0; i < 9; i++)
-            std::cout << contact.get_nickname()[i];
-        std::cout << "." << "|";
-    }
-    std::cout << std::endl;
 }
 
 size_t PhoneBook::get_last_index(void) const
@@ -103,17 +121,33 @@ void PhoneBook::add_contact(Contact contact)
     std::string input;
 
     input = "";
-    while (input.empty())
+    while (1)
     {
         std::cout << "ENTER FIRSTNAME:  ";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+        {
+
+            std::cin.ignore();
+            return;
+        }
+        if (!input.empty() && !is_all_spaces(input))
+            break;
     }
     contact.set_firstname(input);
     input = "";
-    while (input.empty())
+    while (1)
     {
         std::cout << "ENTER LASTNAME:  ";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+        {
+
+            std::cin.ignore();
+            return;
+        }
+        if (!input.empty() && !is_all_spaces(input))
+            break;
     }
     contact.set_lastname(input);
     input = "";
@@ -121,20 +155,44 @@ void PhoneBook::add_contact(Contact contact)
     {
         std::cout << "ENTER NICKNAME:  ";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+        {
+
+            std::cin.ignore();
+            return;
+        }
+        if (!input.empty() && !is_all_spaces(input))
+            break;
     }
     contact.set_nickname(input);
     input = "";
-    while (input.empty())
+    while (1)
     {
         std::cout << "ENTER PHONE_NUMBER:  ";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+        {
+
+            std::cin.ignore();
+            return;
+        }
+        if (!input.empty() && !is_all_spaces(input))
+            break;
     }
     contact.set_phonenumber(input);
     input = "";
-    while (input.empty())
+    while (1)
     {
         std::cout << "ENTER DARKEST_SECRET:  ";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+        {
+
+            std::cin.ignore();
+            return;
+        }
+        if (!input.empty() && !is_all_spaces(input))
+            break;
     }
     contact.set_secret(input);
     contact.set_index(this->get_last_index());

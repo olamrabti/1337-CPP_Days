@@ -2,7 +2,8 @@
 #ifndef CONTACT_CLASS_HPP
 #define CONTACT_CLASS_HPP
 
-#include <string>
+#include <iostream>
+#include <iomanip>
 
 class Contact
 {
@@ -15,8 +16,9 @@ private:
     std::string _darkest_secret;
 
 public:
-    Contact() : _index(99), _first_name(""), _last_name(""), _nick_name(""), _phone_number(""), _darkest_secret("") {};
-    ~Contact() {};
+    // TODO defintion allowed ?
+    Contact();
+    ~Contact();
     void set_index(std::size_t index);
     void set_firstname(std::string firstname);
     void set_lastname(std::string lastname);
@@ -29,6 +31,8 @@ public:
     std::string get_nickname(void) const;
     std::string get_phonenumber(void) const;
     std::string get_secret(void) const;
+    void display_contact(void) const;
+    // TODO create display contact ( one info per line )
 };
 
 #endif

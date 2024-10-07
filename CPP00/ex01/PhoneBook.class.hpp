@@ -17,7 +17,7 @@ public:
     ~PhoneBook();
     void add_contact(Contact contact);
     void search_contact(void);
-    void print_contact(Contact contact) const;
+    void print_contacts(void) const;
     size_t get_last_index(void) const;
     void set_last_index();
 };

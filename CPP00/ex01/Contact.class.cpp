@@ -24,6 +24,14 @@ void Contact::set_secret(std::string secret)
     this->_darkest_secret = secret;
 };
 
+Contact::Contact() : _index(99), _first_name(""),
+                     _last_name(""),
+                     _nick_name(""),
+                     _phone_number(""),
+                     _darkest_secret("") {};
+Contact::~Contact() {
+};
+
 void Contact::set_index(std::size_t index)
 {
     this->_index = index;
@@ -52,6 +60,14 @@ std::string Contact::get_phonenumber(void) const
 std::string Contact::get_secret(void) const
 {
     return this->_darkest_secret;
+}
+void Contact::display_contact(void) const
+{
+    std::cout << "   First Name: " << this->_first_name << std::endl;
+    std::cout << "   Last Name: " << this->_last_name << std::endl;
+    std::cout << "   Nickname: " << this->_nick_name << std::endl;
+    std::cout << "   Phone Number: " << this->_phone_number << std::endl;
+    std::cout << "   Darkest Secret: " << this->_darkest_secret << std::endl;
 };
 std::size_t Contact::get_index(void) const
 {
