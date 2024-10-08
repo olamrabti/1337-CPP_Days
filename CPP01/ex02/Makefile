@@ -1,22 +1,22 @@
 
-NAME = phonebook
+
+NAME = brain
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = main.cpp Contact.class.cpp PhoneBook.class.cpp
-HEADERS = Contact.class.hpp PhoneBook.class.hpp
-OBJ = $(SRC:.cpp=.o)
+SRC = main.cpp
+OBJ = main.o
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(SRC) -o $(NAME)
 	
-%.o: %.cpp $(HEADERS)
+%.o: %.cpp 
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean : 
 	rm -f *.o
-
+	
 fclean: clean
 	rm -f $(NAME)
 

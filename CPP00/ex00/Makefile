@@ -14,7 +14,10 @@ $(NAME): $(OBJ)
 %.o: %.cpp 
 	$(CC) $(FLAGS) -c $< -o $@
 
-fclean: 
+clean : 
+	rm -f *.o
+
+fclean: clean
 	rm -f $(NAME)
 
 re: fclean all

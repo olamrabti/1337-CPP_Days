@@ -1,5 +1,13 @@
 #include "PhoneBook.class.hpp"
 
+PhoneBook::PhoneBook()
+{
+    this->_last_index = 0;
+    std::cout << "PHONEBOOK 2.0" << std::endl;
+};
+
+PhoneBook::~PhoneBook() {};
+
 bool is_all_spaces(std::string str)
 {
     for (size_t i = 0; i < str.length(); i++)
@@ -21,19 +29,15 @@ void PhoneBook::search_contact(void)
               << std::setw(10) << "LastName" << "|"
               << std::setw(10) << "Nickname" << "|" << std::endl;
     std::cout << " ------------------------------------------- " << std::endl;
-    this->print_contacts();
+    if (this->print_contacts() == EMPTY)
+        return;
     std::cout << " ------------------------------------------- " << std::endl;
     while (1)
     {
-        std::cout << " ENTER INDEX : " << std::endl;
+        std::cout << " SELECT INDEX : " << std::endl;
         std::getline(std::cin, input);
-        if (input == "EXIT")
+        if (input == "EXIT" || std::cin.eof())
             exit(0);
-        if (std::cin.eof())
-        {
-            std::cout << std::endl;
-            break;
-        }
         if (input.length() > 1 || std::atoi(input.c_str()) >= 8 || !std::isdigit(input[0]))
         {
             if (!std::isdigit(input[0]))
@@ -63,19 +67,19 @@ void PhoneBook::search_contact(void)
     }
 }
 
-void PhoneBook::print_contacts(void) const
+int PhoneBook::print_contacts(void) const
 {
     if (this->_contact[0].get_index() == 99)
     {
         std::cout << "            PHONEBOOK IS EMPTY " << std::endl
                   << std::endl;
-        return;
+        return EMPTY;
     }
     for (int j = 0; j < 8; j++)
     {
 
         if (this->_contact[j].get_index() == 99)
-            return;
+            return 0;
         std::cout << "|";
         std::cout << std::setw(10) << this->_contact[j].get_index() << "|";
         if (this->_contact[j].get_firstname().length() <= 10)
@@ -104,6 +108,7 @@ void PhoneBook::print_contacts(void) const
         }
         std::cout << std::endl;
     }
+    return 0;
 }
 
 size_t PhoneBook::get_last_index(void) const
@@ -126,11 +131,7 @@ void PhoneBook::add_contact(Contact contact)
         std::cout << "ENTER FIRSTNAME:  ";
         std::getline(std::cin, input);
         if (std::cin.eof())
-        {
-
-            std::cin.ignore();
-            return;
-        }
+            exit(0);
         if (!input.empty() && !is_all_spaces(input))
             break;
     }
@@ -141,11 +142,7 @@ void PhoneBook::add_contact(Contact contact)
         std::cout << "ENTER LASTNAME:  ";
         std::getline(std::cin, input);
         if (std::cin.eof())
-        {
-
-            std::cin.ignore();
-            return;
-        }
+            exit(0);
         if (!input.empty() && !is_all_spaces(input))
             break;
     }
@@ -156,11 +153,7 @@ void PhoneBook::add_contact(Contact contact)
         std::cout << "ENTER NICKNAME:  ";
         std::getline(std::cin, input);
         if (std::cin.eof())
-        {
-
-            std::cin.ignore();
-            return;
-        }
+            exit(0);
         if (!input.empty() && !is_all_spaces(input))
             break;
     }
@@ -171,11 +164,7 @@ void PhoneBook::add_contact(Contact contact)
         std::cout << "ENTER PHONE_NUMBER:  ";
         std::getline(std::cin, input);
         if (std::cin.eof())
-        {
-
-            std::cin.ignore();
-            return;
-        }
+            exit(0);
         if (!input.empty() && !is_all_spaces(input))
             break;
     }
@@ -186,11 +175,7 @@ void PhoneBook::add_contact(Contact contact)
         std::cout << "ENTER DARKEST_SECRET:  ";
         std::getline(std::cin, input);
         if (std::cin.eof())
-        {
-
-            std::cin.ignore();
-            return;
-        }
+            exit(0);
         if (!input.empty() && !is_all_spaces(input))
             break;
     }
@@ -198,15 +183,4 @@ void PhoneBook::add_contact(Contact contact)
     contact.set_index(this->get_last_index());
     this->_contact[get_last_index()] = contact;
     this->set_last_index();
-};
-
-PhoneBook::PhoneBook()
-{
-    this->_last_index = 0;
-    std::cout << "PHONEBOOK 2.0" << std::endl;
-};
-
-PhoneBook::~PhoneBook()
-{
-    return;
 };

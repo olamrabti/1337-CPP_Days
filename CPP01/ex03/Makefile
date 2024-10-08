@@ -1,9 +1,10 @@
 
-NAME = phonebook
+NAME = human
 CC = c++
-FLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = main.cpp Contact.class.cpp PhoneBook.class.cpp
-HEADERS = Contact.class.hpp PhoneBook.class.hpp
+FLAGS = -Wall -Wextra -Werror -std=c++98 
+SRC = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+HEADERS = Weapon.hpp HumanA.hpp HumanB.hpp
+
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)

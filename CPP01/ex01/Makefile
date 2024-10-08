@@ -1,9 +1,9 @@
 
-NAME = phonebook
+NAME = horde
 CC = c++
-FLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = main.cpp Contact.class.cpp PhoneBook.class.cpp
-HEADERS = Contact.class.hpp PhoneBook.class.hpp
+FLAGS = -Wall -Wextra -Werror -std=c++98 
+SRC = main.cpp Zombie.cpp zombieHorde.cpp
+HEADERS = Zombie.hpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
