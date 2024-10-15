@@ -12,7 +12,7 @@ private:
     Weapon &weapon;
 
 public:
-    HumanA(std::string name, Weapon const &the_weapon);
+    HumanA(std::string name, Weapon &the_weapon);
     ~HumanA();
     void attack();
 };

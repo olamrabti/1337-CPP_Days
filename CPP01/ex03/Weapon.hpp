@@ -5,7 +5,6 @@
 
 class Weapon
 {
-
 private:
     std::string type;
 
