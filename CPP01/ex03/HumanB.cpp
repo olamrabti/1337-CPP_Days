@@ -3,10 +3,18 @@
 
 HumanB::HumanB(std::string h_name) : name(h_name), weapon(NULL) {};
 
-HumanB::~HumanB() {};
+HumanB::~HumanB()
+{
+    std::cout << this->name << "Destroyed" << std::endl;
+};
 
 void HumanB::attack()
 {
+    if (this->weapon == NULL)
+    {
+        std::cout << "Weapon not assigned!" << std::endl;
+        return;
+    }
     std::cout << this->name << " attacks with their "
               << this->weapon->getType() << std::endl;
 }

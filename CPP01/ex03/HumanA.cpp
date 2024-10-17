@@ -2,7 +2,9 @@
 
 HumanA::HumanA(std::string h_name, Weapon &the_weapon) : name(h_name), weapon(the_weapon) {};
 
-HumanA::~HumanA() {
+HumanA::~HumanA()
+{
+    std::cout << this->name << "Destroyed" << std::endl;
 };
 
 void HumanA::attack()

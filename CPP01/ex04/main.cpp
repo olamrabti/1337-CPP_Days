@@ -3,6 +3,12 @@
 
 int main(int ac, char *av[])
 {
+
+    if (av[2][0] == '\0')
+    {
+        std::cerr << "INVALID INPUT" << std::endl;
+        return 1;
+    }
     if (ac == 4)
     {
         FindAndReplace replacer(av[1], av[2], av[3]);

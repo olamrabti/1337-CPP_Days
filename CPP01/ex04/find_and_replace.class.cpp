@@ -16,6 +16,7 @@ void FindAndReplace::replace_in_line(std::string &line)
     {
         line.erase(position, _to_replace_length);
         line.insert(position, this->_replacement);
+        std::cout << "Pos " << position << std::endl;
         position += this->_replacement.length();
     }
 };
@@ -25,8 +26,12 @@ void FindAndReplace::process_file(std::ifstream &infile, std::ofstream &outfile)
     std::string line;
     while (std::getline(infile, line))
     {
+        if (!infile.eof())
+            line += "\n";
+        std::cout << "Before " << line << std::endl;
         replace_in_line(line);
-        outfile << line << std::endl;
+        std::cout << "After " << line << std::endl;
+        outfile << line;
     }
 };
 
