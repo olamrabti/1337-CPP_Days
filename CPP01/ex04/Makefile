@@ -1,8 +1,8 @@
 NAME = program
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 
-SRC = main.cpp find_and_replace.class.cpp
-HEADERS = find_and_replace.class.hpp
+SRC = main.cpp FindAndReplace.cpp
+HEADERS = FindAndReplace.hpp
 
 OBJ = $(SRC:.cpp=.o)
 

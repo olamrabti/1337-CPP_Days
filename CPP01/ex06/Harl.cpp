@@ -1,4 +1,4 @@
-#include "harl.class.hpp"
+#include "Harl.hpp"
 
 void Harl::debug(void)
 {

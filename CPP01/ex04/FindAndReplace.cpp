@@ -1,5 +1,5 @@
 
-#include "find_and_replace.class.hpp"
+#include "FindAndReplace.hpp"
 
 FindAndReplace::FindAndReplace(std::string in_file, std::string find_str, std::string replace_with)
     : _input_file(in_file), _to_replace(find_str), _replacement(replace_with)

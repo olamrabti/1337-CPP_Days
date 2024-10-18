@@ -1,5 +1,5 @@
 
-#include "find_and_replace.class.hpp"
+#include "FindAndReplace.hpp"
 
 int main(int ac, char *av[])
 {
