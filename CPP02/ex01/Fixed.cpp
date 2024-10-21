@@ -19,6 +19,22 @@ Fixed &Fixed::operator=(const Fixed &rhs)
     return *this;
 }
 
+std::ostream &Fixed::operator<<(std::ostream &os) const
+{
+    os << this->getRawBits();
+    return os;
+}
+
+Fixed::Fixed(const int integer) : _value(integer)
+{
+    this->_value = integer << this->_fixed_pt;
+}
+
+Fixed::Fixed(const float fl_num)
+{
+    this->_value = static_cast<int>(roundf(fl_num * (1 << this->_fixed_pt)));
+}
+
 Fixed::~Fixed()
 {
     std::cout << "Destructor called" << std::endl;
@@ -33,4 +49,13 @@ int Fixed::getRawBits(void) const
 void Fixed::setRawBits(int const raw)
 {
     this->_value = raw;
+}
+float Fixed::toFloat(void) const
+{
+    return (static_cast<float>(this->_value) / (1 << this->_fixed_pt));
+}
+
+int Fixed::toInt(void) const
+{
+    return (this->_value >> this->_fixed_pt);
 }
