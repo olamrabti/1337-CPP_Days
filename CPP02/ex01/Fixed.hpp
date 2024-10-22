@@ -11,7 +11,6 @@ public:
     Fixed(const float integer);
     Fixed(const Fixed &src);
     Fixed &operator=(const Fixed &rsh);
-    std::ostream &operator<<(std::ostream &os) const;
     ~Fixed();
     int getRawBits(void) const;
     void setRawBits(int const raw);
@@ -22,4 +21,5 @@ private:
     int _value;
     static const int _fixed_pt = 8;
 };
+std::ostream &operator<<(std::ostream &os, const Fixed &pt);
 #endif

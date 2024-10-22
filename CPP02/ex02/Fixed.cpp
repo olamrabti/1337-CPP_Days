@@ -60,3 +60,62 @@ int Fixed::toInt(void) const
 {
     return (this->_value >> this->_fixed_pt);
 }
+
+bool Fixed::operator>(const Fixed &rsh) const
+{
+    return this->_value > rsh._value;
+};
+bool Fixed::operator<(const Fixed &rsh) const
+{
+    return this->_value < rsh._value;
+};
+bool Fixed::operator>=(const Fixed &rsh) const
+{
+    return this->_value >= rsh._value;
+};
+bool Fixed::operator<=(const Fixed &rsh) const
+{
+    return this->_value <= rsh._value;
+};
+bool Fixed::operator==(const Fixed &rsh) const
+{
+    return this->_value == rsh._value;
+};
+bool Fixed::operator!=(const Fixed &rsh) const
+{
+    return this->_value != rsh._value;
+};
+Fixed Fixed::operator+(const Fixed &rsh) const
+{
+    return Fixed(this->_value + rsh._value);
+};
+Fixed Fixed::operator-(const Fixed &rsh) const
+{
+    return Fixed(this->_value - rsh._value);
+};
+
+Fixed Fixed::operator-(void) const
+{
+    return Fixed(-this->_value);
+}
+
+Fixed Fixed::operator*(const Fixed &rsh) const
+{
+    return Fixed(this->_value * rsh._value);
+};
+Fixed Fixed::operator/(const Fixed &rsh) const
+{
+    return Fixed(this->_value / rsh._value);
+};
+Fixed &Fixed::operator++(void) {
+    //  epsillon not 1
+};
+Fixed &Fixed::operator--(void) {
+
+};
+Fixed Fixed::operator++(int) {
+
+};
+Fixed Fixed::operator--(int) {
+
+};
