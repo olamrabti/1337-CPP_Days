@@ -2,8 +2,8 @@
 
 int main()
 {
-    ClapTrap player1("chi wahd");
-    ClapTrap player2("wahd akhor");
+    ClapTrap player1("First_player");
+    ClapTrap player2("Second_player");
 
     player1.attack(player2.get_name());
     player2.takeDamage(8);

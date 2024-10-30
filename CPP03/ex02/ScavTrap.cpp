@@ -5,7 +5,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
     _hit_pts = 100;
     _energy_pts = 50;
     _attack_damage = 20;
-    std::cout << _name << " is Ready as a ScavTrap..." << std::endl;
+    std::cout << "Constructor called : " << _name << " is Ready as a ScavTrap..." << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &src) : ClapTrap(src._name)
@@ -28,7 +28,7 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &rhs)
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << _name << " is Destoyed as a ScavTrap." << std::endl;
+    std::cout << "Destructor called : ScavTrap " << _name << " is Destoyed." << std::endl;
 }
 
 void ScavTrap::attack(const std::string &target)

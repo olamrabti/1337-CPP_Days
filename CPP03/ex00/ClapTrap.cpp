@@ -2,7 +2,7 @@
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _hit_pts(10), _energy_pts(10), _attack_damage(0)
 {
-    std::cout << this->_name << " is Ready..." << std::endl;
+    std::cout << "Contructor called : " << this->_name << " is Ready..." << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &src)
@@ -25,7 +25,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &rhs)
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << this->_name << " is Destoyed." << std::endl;
+    std::cout << "Destructor called : " << this->_name << " is Destoyed." << std::endl;
 }
 
 void ClapTrap::attack(const std::string &target)
@@ -43,12 +43,13 @@ void ClapTrap::takeDamage(unsigned int amount)
 {
     this->_hit_pts -= amount;
     std::cout << this->_name << " loses " << amount << " of hit points" << std::endl;
+    std::cout << this->_name << " has now " << this->_hit_pts << " of hit points" << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
     std::cout << this->_name << " is Reparing..." << std::endl;
-    this->_hit_pts = amount;
+    this->_hit_pts += amount;
     this->_energy_pts--;
     std::cout << this->_name << " has now " << this->_hit_pts << " of hit points" << std::endl;
 }
