@@ -15,6 +15,6 @@ public:
 
 private:
     int _value;
-    static const int _fixed_pt = 8;
+    static const int _fixed_pt;
 };
 #endif

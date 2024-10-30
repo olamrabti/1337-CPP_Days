@@ -1,7 +1,8 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed() : _value(0) {
-                 };
+const int Fixed::_fixed_pt = 8;
+
+Fixed::Fixed() : _value(0) {};
 
 Fixed::Fixed(const Fixed &src)
 {
@@ -15,7 +16,7 @@ Fixed &Fixed::operator=(const Fixed &rhs)
     return *this;
 };
 
-Fixed::Fixed(const int integer) : _value(integer)
+Fixed::Fixed(const int integer)
 {
     this->_value = integer << this->_fixed_pt;
 };
@@ -31,8 +32,7 @@ std::ostream &operator<<(std::ostream &os, Fixed const &pt)
     return os;
 };
 
-Fixed::~Fixed() {
-};
+Fixed::~Fixed() {};
 
 int Fixed::getRawBits(void) const
 {
@@ -85,18 +85,18 @@ bool Fixed::operator!=(const Fixed &rsh) const
 
 Fixed Fixed::operator+(const Fixed &rsh) const
 {
-    return Fixed(this->_value + rsh._value);
+    return Fixed(this->toFloat() + rsh.toFloat());
 };
 
 Fixed Fixed::operator-(const Fixed &rsh) const
 {
-    return Fixed(this->_value - rsh._value);
+    return Fixed(this->toFloat() - rsh.toFloat());
 };
 
 Fixed Fixed::operator-(void) const
 {
-    return Fixed(-this->_value);
-}
+    return Fixed(-this->toInt());
+};
 
 Fixed Fixed::operator*(const Fixed &rsh) const
 {
@@ -104,6 +104,7 @@ Fixed Fixed::operator*(const Fixed &rsh) const
     result.setRawBits((this->_value * rsh._value) / (1 << this->_fixed_pt));
     return result;
 };
+
 Fixed Fixed::operator/(const Fixed &rsh) const
 {
     Fixed result;
@@ -141,24 +142,24 @@ Fixed Fixed::operator--(int)
 
 Fixed &Fixed::min(Fixed &f1, Fixed &f2)
 {
-    if (f1._value < f2._value)
+    if (f1 < f2)
         return f1;
     return f2;
 };
 
 Fixed const &Fixed::min(const Fixed &f1, const Fixed &f2)
 {
-    if (f1._value < f2._value)
+    if (f1 < f2)
         return f1;
     return f2;
 };
 
 Fixed &Fixed::max(Fixed &f1, Fixed &f2)
 {
-    return ((f1.getRawBits() < f2.getRawBits()) ? f2 : f1);
+    return ((f1 < f2) ? f2 : f1);
 };
 
 Fixed const &Fixed::max(const Fixed &f1, const Fixed &f2)
 {
-    return ((f1.getRawBits() < f2.getRawBits()) ? f2 : f1);
+    return ((f1 < f2) ? f2 : f1);
 };

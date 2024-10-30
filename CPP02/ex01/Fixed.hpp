@@ -19,7 +19,7 @@ public:
 
 private:
     int _value;
-    static const int _fixed_pt = 8;
+    static const int _fixed_pt;
 };
 std::ostream &operator<<(std::ostream &os, const Fixed &pt);
 #endif
