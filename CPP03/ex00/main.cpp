@@ -6,7 +6,7 @@ int main()
     ClapTrap player2("Second_player");
 
     player1.attack(player2.get_name());
-    player2.takeDamage(8);
+    player2.takeDamage(12);
     player2.beRepaired(10);
     player2.attack(player1.get_name());
     player1.takeDamage(5);

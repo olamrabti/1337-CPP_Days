@@ -12,6 +12,7 @@ private:
     int _attack_damage;
 
 public:
+    ClapTrap();
     ClapTrap(std::string name);
     ClapTrap(const ClapTrap &src);
     ClapTrap &operator=(const ClapTrap &rhs);

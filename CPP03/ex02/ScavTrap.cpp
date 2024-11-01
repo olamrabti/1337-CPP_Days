@@ -1,5 +1,10 @@
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap()
+{
+    std::cout << "Default Contructor called for ScavTrap" << std::endl;
+}
+
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
     _hit_pts = 100;
