@@ -2,7 +2,7 @@
 
 PhoneBook::PhoneBook()
 {
-    this->_last_index = 0;
+    _last_index = 0;
     std::cout << "PHONEBOOK 2.0" << std::endl;
 };
 
@@ -29,7 +29,7 @@ void PhoneBook::search_contact(void)
               << std::setw(10) << "LastName" << "|"
               << std::setw(10) << "Nickname" << "|" << std::endl;
     std::cout << " ------------------------------------------- " << std::endl;
-    if (this->print_contacts() == EMPTY)
+    if (print_contacts() == EMPTY)
         return;
     std::cout << " ------------------------------------------- " << std::endl;
     while (1)
@@ -51,13 +51,13 @@ void PhoneBook::search_contact(void)
             {
                 if (j == std::atoi(input.c_str()))
                 {
-                    if (this->_contact[j].get_index() == 99)
+                    if (_contact[j].get_index() == 99)
                         std::cout << "CONTACT NOT FOUND !" << std::endl;
                     else
                     {
                         std::cout << " \nSELECTED CONTACT :" << std::endl;
                         std::cout << " ------------------------------------------- " << std::endl;
-                        this->_contact[j].display_contact();
+                        _contact[j].display_contact();
                         std::cout << " ------------------------------------------- " << std::endl;
                     }
                 }
@@ -69,7 +69,7 @@ void PhoneBook::search_contact(void)
 
 int PhoneBook::print_contacts(void) const
 {
-    if (this->_contact[0].get_index() == 99)
+    if (_contact[0].get_index() == 99)
     {
         std::cout << "            PHONEBOOK IS EMPTY " << std::endl
                   << std::endl;
@@ -78,32 +78,32 @@ int PhoneBook::print_contacts(void) const
     for (int j = 0; j < 8; j++)
     {
 
-        if (this->_contact[j].get_index() == 99)
+        if (_contact[j].get_index() == 99)
             return 0;
         std::cout << "|";
-        std::cout << std::setw(10) << this->_contact[j].get_index() << "|";
-        if (this->_contact[j].get_firstname().length() <= 10)
-            std::cout << std::setw(10) << this->_contact[j].get_firstname() << "|";
+        std::cout << std::setw(10) << _contact[j].get_index() << "|";
+        if (_contact[j].get_firstname().length() <= 10)
+            std::cout << std::setw(10) << _contact[j].get_firstname() << "|";
         else
         {
             for (int i = 0; i < 9; i++)
-                std::cout << this->_contact[j].get_firstname()[i];
+                std::cout << _contact[j].get_firstname()[i];
             std::cout << "." << "|";
         }
-        if (this->_contact[j].get_lastname().length() <= 10)
-            std::cout << std::setw(10) << this->_contact[j].get_lastname() << "|";
+        if (_contact[j].get_lastname().length() <= 10)
+            std::cout << std::setw(10) << _contact[j].get_lastname() << "|";
         else
         {
             for (int i = 0; i < 9; i++)
-                std::cout << this->_contact[j].get_lastname()[i];
+                std::cout << _contact[j].get_lastname()[i];
             std::cout << "." << "|";
         }
-        if (this->_contact[j].get_nickname().length() <= 10)
-            std::cout << std::setw(10) << this->_contact[j].get_nickname() << "|";
+        if (_contact[j].get_nickname().length() <= 10)
+            std::cout << std::setw(10) << _contact[j].get_nickname() << "|";
         else
         {
             for (int i = 0; i < 9; i++)
-                std::cout << this->_contact[j].get_nickname()[i];
+                std::cout << _contact[j].get_nickname()[i];
             std::cout << "." << "|";
         }
         std::cout << std::endl;
@@ -113,12 +113,12 @@ int PhoneBook::print_contacts(void) const
 
 size_t PhoneBook::get_last_index(void) const
 {
-    return this->_last_index;
+    return _last_index;
 }
 
 void PhoneBook::set_last_index()
 {
-    this->_last_index = (this->_last_index + 1) % 8;
+    _last_index = (_last_index + 1) % 8;
 };
 
 void PhoneBook::add_contact(Contact contact)
@@ -180,7 +180,7 @@ void PhoneBook::add_contact(Contact contact)
             break;
     }
     contact.set_secret(input);
-    contact.set_index(this->get_last_index());
-    this->_contact[get_last_index()] = contact;
-    this->set_last_index();
+    contact.set_index(get_last_index());
+    _contact[get_last_index()] = contact;
+    set_last_index();
 };

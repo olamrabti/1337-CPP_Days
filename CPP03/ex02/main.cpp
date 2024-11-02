@@ -3,13 +3,13 @@
 
 int main()
 {
-    ClapTrap player1("First_player");
-    ScavTrap player2("Second_player");
-    FragTrap player3("Third_player");
+    ClapTrap player1("\033[1;31m First_Player\033[0m");
+    ScavTrap player2("\033[1;34m Second_player\033[0m");
+    FragTrap player3("\033[1;33m Third_player\033[0m");
 
     player1.attack(player2.get_name());
-    player2.takeDamage(8);
-    player2.beRepaired(10);
+    player2.takeDamage(110);
+    player2.beRepaired(11);
 
     player2.attack(player1.get_name());
     player1.takeDamage(5);

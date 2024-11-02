@@ -38,13 +38,18 @@ FragTrap::~FragTrap()
 
 void FragTrap::attack(const std::string &target)
 {
-    if (_energy_pts == 0 || _hit_pts == 0)
+    if (_energy_pts <= 0)
     {
-        std::cout << "\nOops! " << _name << " Cant Attack now ! He is probably dead!" << std::endl;
+        std::cout << _name << " Doesnt have enough energy points!" << std::endl;
         return;
     }
-    std::cout << "\nFragTrap " << _name << " attacks " << target << std::endl;
-    _energy_pts--;
+    if (_hit_pts > 0)
+    {
+        std::cout << "\nFragTrap " << _name << " attacks " << target << std::endl;
+        _energy_pts--;
+    }
+    else
+        std::cout << "\nOops! " << _name << " Cant Attack now ! He is probably dead!" << std::endl;
 }
 
 void FragTrap::highFivesGuy()

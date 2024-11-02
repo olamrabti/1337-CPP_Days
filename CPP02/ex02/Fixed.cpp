@@ -12,18 +12,18 @@ Fixed::Fixed(const Fixed &src)
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
     if (this != &rhs)
-        this->_value = rhs.getRawBits();
+        _value = rhs.getRawBits();
     return *this;
 };
 
 Fixed::Fixed(const int integer)
 {
-    this->_value = integer << this->_fixed_pt;
+    _value = integer << _fixed_pt;
 };
 
 Fixed::Fixed(const float fl_num)
 {
-    this->_value = (int)(roundf(fl_num * (1 << this->_fixed_pt)));
+    _value = (int)(roundf(fl_num * (1 << _fixed_pt)));
 };
 
 std::ostream &operator<<(std::ostream &os, Fixed const &pt)
@@ -36,91 +36,91 @@ Fixed::~Fixed() {};
 
 int Fixed::getRawBits(void) const
 {
-    return this->_value;
+    return _value;
 };
 
 void Fixed::setRawBits(int const raw)
 {
-    this->_value = raw;
+    _value = raw;
 };
 float Fixed::toFloat(void) const
 {
-    return ((float)(this->_value) / (1 << this->_fixed_pt));
+    return ((float)(_value) / (1 << _fixed_pt));
 };
 
 int Fixed::toInt(void) const
 {
-    return (this->_value >> this->_fixed_pt);
+    return (_value >> _fixed_pt);
 };
 
 bool Fixed::operator>(const Fixed &rsh) const
 {
-    return this->_value > rsh._value;
+    return _value > rsh._value;
 };
 
 bool Fixed::operator<(const Fixed &rsh) const
 {
-    return this->_value < rsh._value;
+    return _value < rsh._value;
 };
 
 bool Fixed::operator>=(const Fixed &rsh) const
 {
-    return this->_value >= rsh._value;
+    return _value >= rsh._value;
 };
 
 bool Fixed::operator<=(const Fixed &rsh) const
 {
-    return this->_value <= rsh._value;
+    return _value <= rsh._value;
 };
 
 bool Fixed::operator==(const Fixed &rsh) const
 {
-    return this->_value == rsh._value;
+    return _value == rsh._value;
 };
 
 bool Fixed::operator!=(const Fixed &rsh) const
 {
-    return this->_value != rsh._value;
+    return _value != rsh._value;
 };
 
 Fixed Fixed::operator+(const Fixed &rsh) const
 {
-    return Fixed(this->toFloat() + rsh.toFloat());
+    return Fixed(toFloat() + rsh.toFloat());
 };
 
 Fixed Fixed::operator-(const Fixed &rsh) const
 {
-    return Fixed(this->toFloat() - rsh.toFloat());
+    return Fixed(toFloat() - rsh.toFloat());
 };
 
 Fixed Fixed::operator-(void) const
 {
-    return Fixed(-this->toInt());
+    return Fixed(-toInt());
 };
 
 Fixed Fixed::operator*(const Fixed &rsh) const
 {
     Fixed result;
-    result.setRawBits((this->_value * rsh._value) / (1 << this->_fixed_pt));
+    result.setRawBits((_value * rsh._value) / (1 << _fixed_pt));
     return result;
 };
 
 Fixed Fixed::operator/(const Fixed &rsh) const
 {
     Fixed result;
-    result.setRawBits((this->_value * (1 << this->_fixed_pt)) / rsh._value);
+    result.setRawBits((_value * (1 << _fixed_pt)) / rsh._value);
     return result;
 };
 
 Fixed &Fixed::operator++(void)
 {
-    this->_value++;
+    _value++;
     return *this;
 };
 
 Fixed &Fixed::operator--(void)
 {
-    this->_value--;
+    _value--;
     return *this;
 };
 
@@ -128,7 +128,7 @@ Fixed Fixed::operator++(int)
 {
     Fixed old;
     old = *this;
-    this->_value++;
+    _value++;
     return old;
 };
 
@@ -136,7 +136,7 @@ Fixed Fixed::operator--(int)
 {
     Fixed old;
     old = *this;
-    this->_value--;
+    _value--;
     return old;
 };
 
