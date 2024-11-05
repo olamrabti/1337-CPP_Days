@@ -1,8 +1,8 @@
-NAME = animal
+NAME = Abstract
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 
-SRC = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp    
-HEADERS = Animal.hpp  Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp 
+SRC = main.cpp AAnimal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
+HEADERS = AAnimal.hpp  Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp Brain.hpp
 
 OBJ = $(SRC:.cpp=.o)
 
