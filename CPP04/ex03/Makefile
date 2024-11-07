@@ -1,8 +1,8 @@
 NAME = interface
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 
-SRC = main.cpp AMateria.cpp 
-HEADERS = AMateria.hpp
+SRC = AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp  main.cpp
+HEADERS = AMateria.hpp IMateriaSource.hpp Ice.hpp Character.hpp Cure.hpp ICharacter.hpp MateriaSource.hpp
 
 OBJ = $(SRC:.cpp=.o)
 
