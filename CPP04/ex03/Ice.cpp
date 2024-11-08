@@ -2,10 +2,12 @@
 
 Ice::Ice() : AMateria("ice")
 {
+    std::cout << "Default constructor called for Ice" << std::endl;
 }
 
 Ice::Ice(const Ice &src)
 {
+    std::cout << "Copy constructor called for Ice" << std::endl;
     *this = src;
 }
 
@@ -18,6 +20,7 @@ Ice &Ice::operator=(const Ice &rhs)
 
 Ice::~Ice()
 {
+    std::cout << "Destructor called for Ice" << std::endl;
 }
 
 void Ice::setType(std::string type)

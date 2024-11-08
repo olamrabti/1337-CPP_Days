@@ -2,10 +2,12 @@
 
 Cure::Cure() : AMateria("cure")
 {
+    std::cout << "Default constructor called for Cure" << std::endl;
 }
 
 Cure::Cure(const Cure &src)
 {
+    std::cout << "Copy constructor called for Cure" << std::endl;
     *this = src;
 }
 
@@ -18,6 +20,7 @@ Cure &Cure::operator=(const Cure &rhs)
 
 Cure::~Cure()
 {
+    std::cout << "Destructor called for Cure" << std::endl;
 }
 
 void Cure::setType(std::string type)

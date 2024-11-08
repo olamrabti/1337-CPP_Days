@@ -2,6 +2,7 @@
 
 MateriaSource::MateriaSource()
 {
+    std::cout << "Default constructor called for MateriaSource" << std::endl;
     for (int i = 0; i < 4; i++)
         inventory[i] = NULL;
     return;
@@ -9,12 +10,14 @@ MateriaSource::MateriaSource()
 
 MateriaSource::MateriaSource(const MateriaSource &copy)
 {
+    std::cout << "Copy constructor called for MateriaSource" << std::endl;
     *this = copy;
     return;
 }
 
 MateriaSource::~MateriaSource()
 {
+    std::cout << "Destructor called for MateriaSource" << std::endl;
     for (int i = 0; i < 4; i++)
     {
         if (inventory[i])

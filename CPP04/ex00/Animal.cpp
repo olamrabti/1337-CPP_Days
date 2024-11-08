@@ -1,6 +1,6 @@
 #include "Animal.hpp"
 
-Animal::Animal()
+Animal::Animal() : type("")
 {
     std::cout << "Default constructor called for Animal" << std::endl;
 }
@@ -25,7 +25,7 @@ Animal::~Animal()
 
 void Animal::makeSound() const
 {
-    std::cout << "Make a sound ? Wait! Who am I ?" << std::endl;
+    std::cout << "🔇 : Make a sound ?! I need to know how am I first 😏 " << std::endl;
 }
 
 const std::string &Animal::getType() const

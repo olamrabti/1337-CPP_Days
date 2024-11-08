@@ -18,16 +18,34 @@ int main()
 
     for (int i = 0; i < size / 2; ++i)
     {
+        std::cout << "     INITIALIZING Animal[" << i << "]" << std::endl;
         animals[i] = new Dog();
     }
     for (int i = size / 2; i < size; ++i)
     {
+        std::cout << "     INITIALIZING Animal[" << i << "]" << std::endl;
         animals[i] = new Cat();
     }
+    std::cout << "---------------------------------------------------" << std::endl;
+    std::cout << "     For this Test We Have : ( " << size << " ) Animals.\n"
+              << std::endl;
     for (int i = 0; i < size; ++i)
     {
+        std::cout << "Animal number : " << i + 1 << " is a " << animals[i]->getType() << " and says : " << std::endl;
+        animals[i]->makeSound();
+    }
+    std::cout << "---------------------------------------------------" << std::endl;
+    for (int i = 0; i < size; ++i)
+    {
+        std::cout << "     DELETING Animal[" << i << "]" << std::endl;
         delete animals[i];
     }
+
+    // TODO checkout this test for Deep cpiying and shallow copying
+    //  Dog basic;
+    //  {
+    //      Dog tmp = basic;
+    //  }
 
     return 0;
 }

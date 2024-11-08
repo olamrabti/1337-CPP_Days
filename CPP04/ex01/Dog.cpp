@@ -29,5 +29,5 @@ Dog::~Dog()
 
 void Dog::makeSound() const
 {
-    std::cout << "Barks" << std::endl;
+    std::cout << "🔊 : Wuff!" << std::endl;
 }
