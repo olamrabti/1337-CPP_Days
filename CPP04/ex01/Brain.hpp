@@ -5,12 +5,14 @@
 
 class Brain
 {
+private:
+    std::string ideas[100];
+
 public:
     Brain();
     Brain(const Brain &src);
     Brain &operator=(const Brain &rhs);
     virtual ~Brain();
-    std::string ideas[100];
 };
 
 #endif

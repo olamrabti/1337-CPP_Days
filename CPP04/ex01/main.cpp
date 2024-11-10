@@ -26,7 +26,8 @@ int main()
         std::cout << "     INITIALIZING Animal[" << i << "]" << std::endl;
         animals[i] = new Cat();
     }
-    std::cout << "---------------------------------------------------" << std::endl;
+    std::cout << "\n-------------------------My tests--------------------------\n"
+              << std::endl;
     std::cout << "     For this Test We Have : ( " << size << " ) Animals.\n"
               << std::endl;
     for (int i = 0; i < size; ++i)
@@ -34,18 +35,28 @@ int main()
         std::cout << "Animal number : " << i + 1 << " is a " << animals[i]->getType() << " and says : " << std::endl;
         animals[i]->makeSound();
     }
-    std::cout << "---------------------------------------------------" << std::endl;
+    std::cout << "-----------------------------------------------------------" << std::endl;
     for (int i = 0; i < size; ++i)
     {
         std::cout << "     DELETING Animal[" << i << "]" << std::endl;
         delete animals[i];
     }
-
-    // TODO checkout this test for Deep cpiying and shallow copying
-    //  Dog basic;
-    //  {
-    //      Dog tmp = basic;
-    //  }
+    std::cout << "\n------------------ Eval sheet Test ----------------------\n"
+              << std::endl;
+    {
+        Dog basic;
+        {
+            Dog tmp = basic;
+        }
+    }
+    std::cout << "------------------ Bonus Test ----------------------" << std::endl;
+    Animal *basic = new Dog();
+    {
+        Animal *tmp = basic;
+        tmp->makeSound();
+        delete (basic);
+        tmp->makeSound();
+    }
 
     return 0;
 }
