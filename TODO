@@ -2,10 +2,11 @@
 // [ ] Interfaces abd abstract classes in depth.
 // [ ] Wrong Animal and Worngcat in ex01 and above should be modified as well ?
 
-std::cout << "------------------ Bonus Test ----------------------" << std::endl;
-Dog *basic = new Dog();
-{
-    Animal *tmp = basic;
-    delete (basic);
-    tmp->makeSound();
-}
+// std::cout << "------------------ Bonus Test ----------------------" << std::endl;
+//     Animal *basic = new Dog();
+//     {
+//         Animal *tmp = basic;
+//         tmp->makeSound();
+//         delete (basic);
+//         tmp->makeSound();
+//     }

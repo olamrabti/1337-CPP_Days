@@ -32,6 +32,11 @@ std::string const &AMateria::getType() const
     return _type;
 }
 
+void AMateria::setType(std::string type)
+{
+    _type = type;
+}
+
 void AMateria::use(ICharacter &target)
 {
     if (target.getName() == "")

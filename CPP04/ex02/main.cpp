@@ -7,12 +7,12 @@
 
 void f()
 {
-    system("leaks brain");
+    system("leaks Abstract");
 }
 
 int main()
 {
-    // atexit(f);
+    atexit(f);
 
     const AAnimal *j = new Dog();
     const AAnimal *i = new Cat();

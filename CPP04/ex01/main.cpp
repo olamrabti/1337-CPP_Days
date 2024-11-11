@@ -13,7 +13,7 @@ void f()
 int main()
 {
     atexit(f);
-    const int size = 4;
+    int size = 4;
     Animal *animals[size];
 
     for (int i = 0; i < size / 2; ++i)
@@ -48,14 +48,6 @@ int main()
         {
             Dog tmp = basic;
         }
-    }
-    std::cout << "------------------ Bonus Test ----------------------" << std::endl;
-    Animal *basic = new Dog();
-    {
-        Animal *tmp = basic;
-        tmp->makeSound();
-        delete (basic);
-        tmp->makeSound();
     }
 
     return 0;

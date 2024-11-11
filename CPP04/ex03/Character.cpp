@@ -22,7 +22,18 @@ Character &Character::operator=(const Character &rhs)
     {
         _name = rhs._name;
         for (int i = 0; i < 4; i++)
-            inventory[i] = rhs.inventory[i];
+        {
+            if (inventory[i])
+                delete (inventory[i]);
+            inventory[i] = NULL;
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            if (rhs.inventory[i])
+                inventory[i] = rhs.inventory[i]->clone();
+            else
+                inventory[i] = NULL;
+        }
     }
     return *this;
 }
@@ -30,6 +41,12 @@ Character &Character::operator=(const Character &rhs)
 Character::~Character()
 {
     std::cout << "Destructor called for Character" << std::endl;
+    for (int i = 0; i < 4; i++)
+    {
+        if (inventory[i])
+            delete (inventory[i]);
+        inventory[i] = NULL;
+    }
 }
 
 std::string const &Character::getName() const

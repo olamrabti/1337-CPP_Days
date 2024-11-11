@@ -15,6 +15,7 @@ Cat::Cat(const Cat &src) : Animal(src), _brain(new Brain(*src._brain))
 
 Cat &Cat::operator=(const Cat &rhs)
 {
+    std::cout << "Copy Assignment operator called for Dog" << std::endl;
     if (this != &rhs)
     {
         type = rhs.type;
