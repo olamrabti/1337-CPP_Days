@@ -16,7 +16,6 @@ private:
     std::string _darkest_secret;
 
 public:
-    // TODO defintion allowed ?
     Contact();
     ~Contact();
     void set_index(std::size_t index);
@@ -32,7 +31,6 @@ public:
     std::string get_phonenumber(void) const;
     std::string get_secret(void) const;
     void display_contact(void) const;
-    // TODO create display contact ( one info per line )
 };
 
 #endif

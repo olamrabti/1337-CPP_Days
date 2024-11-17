@@ -17,7 +17,7 @@ protected:
 
 public:
 	Bureaucrat(std::string const name, size_t grade);
-	Bureaucrat(Bureaucrat const &copy);
+	Bureaucrat(Bureaucrat const &src);
 	Bureaucrat const &operator=(Bureaucrat const &rhs);
 	~Bureaucrat(void);
 	std::string const &getName() const;

@@ -4,8 +4,7 @@
 #include <iostream>
 #include "AMateria.hpp"
 
-// TODO learn more about it
-class AMateria; // Forward declaration
+class AMateria;
 
 class ICharacter
 {

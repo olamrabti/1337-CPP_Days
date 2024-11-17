@@ -1,6 +1,10 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form(std::string name, size_t s_grade, size_t e_grade)
+AForm::AForm(void) : form_name("DEFAULT"), _signed(false), sign_grade(0), exec_grade(0)
+{
+}
+
+AForm::AForm(std::string name, size_t s_grade, size_t e_grade)
 	: form_name(name), _signed(false), sign_grade(s_grade), exec_grade(e_grade)
 {
 	if (sign_grade < 1 || exec_grade < 1)
@@ -15,39 +19,41 @@ Form::Form(std::string name, size_t s_grade, size_t e_grade)
 	}
 }
 
-Form::~Form()
+AForm::~AForm()
 {
 }
-Form::Form(Form const &src)
-	: form_name(src.form_name), _signed(src._signed), sign_grade(src.sign_grade),
+AForm::AForm(AForm const &src)
+	: form_name(src.form_name),
+	  _signed(src._signed),
+	  sign_grade(src.sign_grade),
 	  exec_grade(src.exec_grade)
 {
 }
 
-Form const &Form::operator=(Form const &rhs)
+AForm const &AForm::operator=(AForm const &rhs)
 {
 	if (this != &rhs)
 		_signed = rhs._signed;
 	return (*this);
 }
 
-std::string const &Form::getName() const
+std::string const &AForm::getName() const
 {
 	return form_name;
 };
-size_t const &Form::get_s_grade() const
+size_t const &AForm::get_s_grade() const
 {
 	return sign_grade;
 };
-size_t const &Form::get_e_grade() const
+size_t const &AForm::get_e_grade() const
 {
 	return exec_grade;
 };
-bool const &Form::isSigned() const
+bool const &AForm::isSigned() const
 {
 	return _signed;
 };
-void Form::beSigned(Bureaucrat const &b)
+void AForm::beSigned(Bureaucrat const &b)
 {
 	if (b.getGrade() <= sign_grade)
 		_signed = true;
@@ -55,7 +61,7 @@ void Form::beSigned(Bureaucrat const &b)
 		throw GradeTooLowException();
 };
 
-std::ostream &operator<<(std::ostream &os, Form const &f)
+std::ostream &operator<<(std::ostream &os, AForm const &f)
 {
 	os << "Form Infos : " << std::endl;
 	os << " Name : " << f.getName() << std::endl;
@@ -65,12 +71,12 @@ std::ostream &operator<<(std::ostream &os, Form const &f)
 	return os;
 }
 
-const char *Form::GradeTooHighException::what() const throw()
+const char *AForm::GradeTooHighException::what() const throw()
 {
 	return "Grade Too High";
 }
 
-const char *Form::GradeTooLowException::what() const throw()
+const char *AForm::GradeTooLowException::what() const throw()
 {
 	return "Grade Too Low";
 }

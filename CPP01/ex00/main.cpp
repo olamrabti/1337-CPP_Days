@@ -1,7 +1,5 @@
 #include "Zombie.hpp"
 
-// TODO delete me ......
-
 void f()
 {
     system("leaks zombie");
@@ -10,7 +8,7 @@ void f()
 int main()
 {
     Zombie *z1;
-    atexit(f); // delete me
+    atexit(f);
     z1 = newZombie("First_zombie");
     z1->announce();
     randomChump("a random zombie");
