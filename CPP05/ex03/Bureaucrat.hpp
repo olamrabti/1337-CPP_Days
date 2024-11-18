@@ -3,13 +3,17 @@
 
 #include <iostream>
 #include <exception>
+#include "AForm.hpp"
+class AForm;
 
 class Bureaucrat
 {
 private:
-	std::string const _name;
-	int _grade;
 	Bureaucrat(void);
+
+protected:
+	std::string const _name;
+	size_t _grade;
 
 public:
 	Bureaucrat(std::string const name, size_t grade);
@@ -20,17 +24,19 @@ public:
 	size_t const &getGrade() const;
 	void incrementGrade();
 	void decrementGrade();
+	void signForm(AForm &f);
+	void executeForm(AForm const &form);
 
 	class GradeTooHighException : public std::exception
 	{
 	public:
-		const char *what() const throw();
+		virtual const char *what() const throw();
 	};
 
 	class GradeTooLowException : public std::exception
 	{
 	public:
-		const char *what() const throw();
+		virtual const char *what() const throw();
 	};
 };
 std::ostream &operator<<(std::ostream &os, Bureaucrat const &b);

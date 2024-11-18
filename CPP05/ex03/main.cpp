@@ -4,6 +4,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int main()
 {
@@ -47,6 +48,16 @@ int main()
     PresidentialPardonForm form4("target3");
 
     b3.executeForm(form4);
-
+    try
+    {
+        Intern someRandomIntern;
+        AForm *rrf;
+        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+        b1.signForm(*rrf);
+    }
+    catch (std::exception const &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
     return 0;
 }
