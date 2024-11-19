@@ -15,12 +15,14 @@ Form::Form(std::string name, size_t s_grade, size_t e_grade)
 	}
 }
 
-Form::~Form()
-{
-}
 Form::Form(Form const &src)
-	: form_name(src.form_name), _signed(src._signed), sign_grade(src.sign_grade),
+	: form_name(src.form_name), sign_grade(src.sign_grade),
 	  exec_grade(src.exec_grade)
+{
+	*this = src;
+}
+
+Form::~Form()
 {
 }
 

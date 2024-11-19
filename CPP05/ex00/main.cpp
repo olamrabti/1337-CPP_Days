@@ -3,12 +3,13 @@
 int main()
 {
     std::cout << "\n------------test 1----------" << std::endl;
-    Bureaucrat b1("B1", 149);
     try
     {
+        Bureaucrat b1("B1", 149);
         std::cout << b1 << std::endl;
         b1.decrementGrade();
         b1.decrementGrade();
+        std::cout << "must not print this if thrown an exception" << std::endl;
     }
     catch (const std::exception &e)
     {

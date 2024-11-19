@@ -3,11 +3,9 @@
 Bureaucrat::Bureaucrat(void)
 {
 }
+
 Bureaucrat::Bureaucrat(std::string const name, size_t grade) : _name(name)
 {
-	if (g < std::numeric_limits<int>::min() || g > std::numeric_limits<int>::max())
-		throw std::overflow_error("Grade out of range!");
-
 	if (grade < 1)
 	{
 		std::cout << "Instantiation Error : ";
@@ -27,7 +25,7 @@ Bureaucrat const &Bureaucrat::operator=(Bureaucrat const &rhs)
 		_grade = rhs._grade;
 	return (*this);
 }
-Bureaucrat::Bureaucrat(Bureaucrat const &src)
+Bureaucrat::Bureaucrat(Bureaucrat const &src) : _name(src._name)
 {
 	*this = src;
 }

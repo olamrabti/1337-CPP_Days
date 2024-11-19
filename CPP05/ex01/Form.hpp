@@ -16,8 +16,8 @@ private:
 public:
 	Form(std::string name, size_t s_grade, size_t e_grade);
 	Form(Form const &src);
-	~Form(void);
 	Form const &operator=(Form const &rhs);
+	~Form(void);
 	std::string const &getName() const;
 	size_t const &get_s_grade() const;
 	size_t const &get_e_grade() const;

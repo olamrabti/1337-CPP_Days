@@ -21,7 +21,7 @@ Bureaucrat const &Bureaucrat::operator=(Bureaucrat const &rhs)
 		_grade = rhs._grade;
 	return (*this);
 }
-Bureaucrat::Bureaucrat(Bureaucrat const &src)
+Bureaucrat::Bureaucrat(Bureaucrat const &src) : _name(src._name)
 {
 	*this = src;
 }

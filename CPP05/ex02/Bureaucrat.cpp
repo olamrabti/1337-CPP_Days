@@ -15,15 +15,16 @@ Bureaucrat::Bureaucrat(std::string const name, size_t grade) : _name(name)
 	_grade = grade;
 }
 
+Bureaucrat::Bureaucrat(Bureaucrat const &src) : _name(src._name)
+{
+	*this = src;
+}
+
 Bureaucrat const &Bureaucrat::operator=(Bureaucrat const &rhs)
 {
 	if (this != &rhs)
 		_grade = rhs._grade;
 	return (*this);
-}
-Bureaucrat::Bureaucrat(Bureaucrat const &src)
-{
-	*this = src;
 }
 
 Bureaucrat::~Bureaucrat(void) {}
