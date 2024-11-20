@@ -110,14 +110,14 @@ void Bureaucrat::executeForm(AForm const &form)
 	}
 	catch (const std::exception &e)
 	{
-		std::cerr << "ExecuteForm Error: " << e.what() << std::endl;
+		std::cerr << "Unable to execute: " << e.what() << std::endl;
 	}
 	catch (const char *e)
 	{
-		std::cerr << "ExecuteForm Error: " << e << std::endl;
+		std::cerr << "Unable to execute: " << e << std::endl;
 	}
 	catch (...)
 	{
-		std::cerr << "Undefined Error" << std::endl;
+		std::cerr << "Unable to execute: Undefined Error" << std::endl;
 	}
 }

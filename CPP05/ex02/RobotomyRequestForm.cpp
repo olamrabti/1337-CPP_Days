@@ -24,9 +24,7 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	if (isSigned() == false)
 		throw "Form Not signed";
-	if (executor.getGrade() < 1) // TODO is it the appropriate check  ????
-		throw GradeTooHighException();
-	if (executor.getGrade() > 150) // TODO is it the appropriate check  ????
+	if (executor.getGrade() > this->get_e_grade())
 		throw GradeTooLowException();
 	std::cout << " 🛠️  Drilling Noises 🛠️ " << std::endl;
 	if (std::rand() % 2)

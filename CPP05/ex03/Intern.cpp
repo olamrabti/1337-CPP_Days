@@ -46,6 +46,5 @@ AForm *Intern::makeForm(std::string name, std::string target)
 			return (this->*functions[i])(target);
 		}
 	}
-
 	throw std::invalid_argument("Invalid request");
 }
