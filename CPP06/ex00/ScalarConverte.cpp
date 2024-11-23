@@ -1,7 +1,7 @@
 #include "ScalarConverte.hpp"
 #include <iostream>
 #include <cstdlib>
-#include <cmath> //TODO forbidden?
+#include <cmath>
 
 ScalarConverte::ScalarConverte(void) {}
 
