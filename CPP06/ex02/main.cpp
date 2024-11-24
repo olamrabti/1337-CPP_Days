@@ -2,15 +2,15 @@
 
 int main()
 {
-    Base *randomInstance = generate();
+    Base *test = generate();
 
     std::cout << "Identify using pointer: ";
-    identify(randomInstance);
+    identify(test);
 
     std::cout << "Identify using reference: ";
-    identify(*randomInstance);
+    identify(*test);
 
-    delete randomInstance;
+    delete test;
 
     return 0;
 }
