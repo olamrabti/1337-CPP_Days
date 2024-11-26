@@ -27,7 +27,7 @@ int main()
     std::cout << std::endl;
 
     std::cout << "Original array (with print<int>): " << std::endl;
-    iter(test, size, print<int>); // TODO learn more about this syntax <int>
+    iter(test, size, print<int>);
     std::cout << std::endl;
 
     std::cout << "Set All elements to 0 :" << std::endl;

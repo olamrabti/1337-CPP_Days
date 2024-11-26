@@ -5,11 +5,11 @@
 
 template <typename T, typename RT>
 
-void iter(T *arr, size_t len, RT func)
+void iter(T *arr, size_t len, RT(*func))
 {
     for (size_t i = 0; i < len; i++)
     {
-        func(arr[i]);
+        (*func)(arr[i]);
     }
 }
 

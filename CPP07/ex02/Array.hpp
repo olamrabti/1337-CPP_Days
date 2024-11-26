@@ -1,6 +1,8 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 
+#include <iostream>
+
 template <typename T>
 
 class Array
@@ -16,6 +18,7 @@ public:
 	~Array(void);
 	Array<T> &operator=(const Array<T> &rhs);
 	T &operator[](unsigned int index);
+	const T &operator[](unsigned int index) const;
 	size_t size(void) const;
 };
 
@@ -31,16 +34,32 @@ Array<T>::~Array(void)
 template <typename T>
 Array<T>::Array(unsigned int n) : elements(NULL), len(n)
 {
-	elements = new T[n](); // TODO learn more about this syntax
+	try
+	{
+		elements = new T[n]();
+	}
+	catch (const std::bad_alloc &e)
+	{
+		std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+		throw;
+	}
 };
 
 template <typename T>
-Array<T>::Array(const Array<T> &copy) : len(copy.len)
+Array<T>::Array(const Array<T> &src) : len(src.len)
 {
-	elements = new T[copy.len];
-	for (size_t i = 0; i < len; ++i)
+	try
 	{
-		elements[i] = copy.elements[i];
+		elements = new T[src.len];
+		for (size_t i = 0; i < len; ++i)
+		{
+			elements[i] = src.elements[i];
+		}
+	}
+	catch (const std::bad_alloc &e)
+	{
+		std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+		throw;
 	}
 }
 
@@ -51,10 +70,18 @@ Array<T> &Array<T>::operator=(const Array<T> &rhs)
 	{
 		delete[] elements;
 		len = rhs.len;
-		elements = new T[len];
-		for (size_t i = 0; i < len; ++i)
+		try
 		{
-			elements[i] = rhs.elements[i];
+			elements = new T[len];
+			for (size_t i = 0; i < len; ++i)
+			{
+				elements[i] = rhs.elements[i];
+			}
+		}
+		catch (const std::bad_alloc &e)
+		{
+			std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+			throw;
 		}
 	}
 	return *this;
@@ -62,6 +89,14 @@ Array<T> &Array<T>::operator=(const Array<T> &rhs)
 
 template <typename T>
 T &Array<T>::operator[](unsigned int index)
+{
+	if (index >= len)
+		throw std::out_of_range("Index is out of bounds.");
+	return elements[index];
+}
+
+template <typename T>
+const T &Array<T>::operator[](unsigned int index) const
 {
 	if (index >= len)
 		throw std::out_of_range("Index is out of bounds.");
