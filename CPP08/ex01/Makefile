@@ -1,8 +1,8 @@
-NAME = program
+NAME = ex01
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 
-SRC =  main.cpp
-HEADERS = 
+SRC =  main.cpp Span.cpp
+HEADERS = Span.hpp
 
 OBJ = $(SRC:.cpp=.o)
 
