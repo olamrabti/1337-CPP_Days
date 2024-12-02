@@ -8,17 +8,19 @@ class Span
 {
 private:
 	unsigned int _max;
-	std::vector<int> _numbers;
+	std::vector<int> c;
 	Span();
 
 public:
 	Span(unsigned int N);
 	~Span();
 	void addNumber(int number);
-	template <typename Iterator>
-	void addNumbers(Iterator begin, Iterator end);
+	void addNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 	unsigned int shortestSpan() const;
 	unsigned int longestSpan() const;
+	std::vector<int>::iterator begin();
+	std::vector<int>::iterator end();
+	void print_all() const;
 };
 
 #endif

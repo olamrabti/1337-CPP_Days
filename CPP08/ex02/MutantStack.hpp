@@ -14,10 +14,10 @@ public:
 	MutantStack const &operator=(MutantStack const &rhs);
 	typedef typename std::deque<T>::iterator iterator;
 	typedef typename std::deque<T>::const_iterator const_iterator;
-	MutantStack<T>::iterator begin();
-	MutantStack<T>::iterator end();
-	MutantStack<T>::const_iterator begin() const;
-	MutantStack<T>::const_iterator end() const;
+	iterator begin();
+	iterator end();
+	const_iterator begin() const;
+	const_iterator end() const;
 };
 
 template <typename T>

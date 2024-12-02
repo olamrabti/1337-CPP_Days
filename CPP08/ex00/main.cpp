@@ -6,14 +6,20 @@ int main()
 {
     try
     {
-        std::vector<int> vec;
-        vec.push_back(1);
-        vec.push_back(2);
-        vec.push_back(4);
-        vec.push_back(5);
+        std::vector<int> numbers;
+        numbers.push_back(1);
+        numbers.push_back(2);
+        numbers.push_back(3);
+        numbers.push_back(4);
+        numbers.push_back(5);
 
-        std::cout << "Searching for (3) in vector {1, 2, 3, 4, 5} : \n"
-                  << easyfind(vec, 3) << std::endl;
+        std::cout << "Searching for (3) in vector { ";
+        for (size_t i = 0; i < numbers.size(); ++i)
+        {
+            std::cout << numbers[i] << " ";
+        }
+        std::cout << "}\n"
+                  << easyfind(numbers, 3) << std::endl;
 
         std::list<int> lst;
         lst.push_back(10);
@@ -22,7 +28,12 @@ int main()
         lst.push_back(40);
         lst.push_back(50);
 
-        std::cout << "Searching for (20) in list {10, 20, 30, 40, 50} : \n"
+        std::cout << "Searching for (20) in list { ";
+        for (std::list<int>::iterator it = lst.begin(); it != lst.end(); ++it)
+        {
+            std::cout << *it << " ";
+        }
+        std::cout << "} \n"
                   << easyfind(lst, 20) << std::endl;
 
         std::cout << "Searching for (80) in list {10, 20, 30, 40, 50} : \n"

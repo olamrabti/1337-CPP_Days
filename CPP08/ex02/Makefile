@@ -2,7 +2,7 @@ NAME = program
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 
 SRC =  main.cpp
-HEADERS = 
+HEADERS = MutantStack.hpp
 
 OBJ = $(SRC:.cpp=.o)
 
