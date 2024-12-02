@@ -1,9 +1,20 @@
 #include "Span.hpp"
 
 Span::Span() {}
+Span::~Span() {}
 Span::Span(unsigned int N) : _max(N) {}
 
-Span::~Span() {}
+Span::Span(const Span &other) : _max(other._max), c(other.c) {}
+
+Span &Span::operator=(const Span &other)
+{
+	if (this != &other)
+	{
+		_max = other._max;
+		c = other.c;
+	}
+	return *this;
+}
 
 void Span::addNumber(int number)
 {

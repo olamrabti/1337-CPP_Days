@@ -14,6 +14,9 @@ private:
 public:
 	Span(unsigned int N);
 	~Span();
+	Span(const Span &other);
+	Span &operator=(const Span &other);
+
 	void addNumber(int number);
 	void addNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 	unsigned int shortestSpan() const;
