@@ -1,8 +1,8 @@
-NAME = ex01
+NAME = btc
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 
-SRC =  main.cpp Span.cpp
-HEADERS = Span.hpp
+SRC =  main.cpp BitcoinExchange.cpp 
+HEADERS = BitcoinExchange.hpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -11,7 +11,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(SRC) -o $(NAME)
 	
-%.o: %.cpp $(HEADERS) 
+%.o: %.cpp $(HEADERS)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean : 

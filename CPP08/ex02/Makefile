@@ -11,7 +11,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(SRC) -o $(NAME)
 	
-%.o: %.cpp $(HEADERS) Makefile
+%.o: %.cpp $(HEADERS) 
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean : 
