@@ -8,9 +8,8 @@
 class BitcoinExchange
 {
 private:
-	std::map<std::string, float> _data;
-
 public:
+	std::map<std::string, float> _data;
 	BitcoinExchange(void);
 	BitcoinExchange(BitcoinExchange const &copy);
 	~BitcoinExchange(void);

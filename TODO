@@ -1,2 +1,4 @@
 // [ ] CPP suggestions : map for the first exercise, stack for the second, maybe deque and vector for the third.
-// 
+// [x] check for space before value (| value)
+// [x] check the header (date | value)
+// [x] -2900-01-11 | 5  break when first error is found dont print the others

@@ -29,21 +29,8 @@ void BitcoinExchange::store_data(void)
 		size_t pos = line.find(',');
 		std::string date = line.substr(0, pos);
 		std::string valueStr = line.substr(pos + 1);
-		try
-		{
-			float value = std::atof(valueStr.c_str());
-			if (value < 0)
-				throw std::runtime_error("Error: Negative value in data.csv: " + valueStr);
-			this->_data[date] = value;
-		}
-		catch (const std::invalid_argument &e)
-		{
-			throw std::runtime_error("Error: Non-numeric value in data.csv: " + valueStr);
-		}
-		catch (const std::out_of_range &e)
-		{
-			throw std::runtime_error("Error: Value out of range in data.csv: " + valueStr);
-		}
+		float value = std::atof(valueStr.c_str());
+		this->_data[date] = value;
 	}
 	data.close();
 }
@@ -65,13 +52,15 @@ void BitcoinExchange::process_input_file(const std::string &filename)
 
 	std::string line;
 	std::getline(inputFile, line);
+	if (line != "date | value")
+		throw std::runtime_error("Error: Invalid Header (date | value).");
 	while (std::getline(inputFile, line))
 	{
 		std::istringstream lineStream(line);
 		std::string date;
 		std::string valueStr;
 
-		if (!std::getline(lineStream, date, '|'))
+		if (!std::getline(lineStream, date, '|') || date.back() != ' ')
 		{
 			std::cerr << "Error: Invalid line: " << line << std::endl;
 			continue;
@@ -79,34 +68,41 @@ void BitcoinExchange::process_input_file(const std::string &filename)
 
 		if (!is_valid_date(date))
 		{
-			std::cerr << "Error: Invalid date format: " << date << std::endl;
+			std::cerr << "Error: bad input => " << date << std::endl;
 			continue;
 		}
-
+		if (!std::getline(lineStream, valueStr) || valueStr[0] != ' ')
+		{
+			std::cerr << "Error: Invalid line: " << line << std::endl;
+			continue;
+		}
 		try
 		{
-			float value = std::atof(valueStr.c_str());
+			double value = std::atof(valueStr.c_str());
 
 			if (value < 0)
 			{
-				std::cerr << "Error: Negative value: " << valueStr << std::endl;
+				std::cerr << "Error: not a positive number." << std::endl;
 				continue;
 			}
 
-			if (value > std::numeric_limits<int>::max())
+			if (value > INT_MAX)
 			{
-				std::cerr << "Error: Value out of range: " << valueStr << std::endl;
+				std::cerr << "Error: too large a number." << std::endl;
 				continue;
 			}
-			std::cout << "Date: " << date << ", Value: " << value << std::endl;
+			date.erase(std::remove(date.begin(), date.end(), ' '), date.end());
+			std::map<std::string, float>::iterator it = _data.lower_bound(date);
+			if (it == _data.begin())
+				std::cout << date << " => " << value << " = No exchange rate for this date" << std::endl;
+			else if (it != _data.end())
+				std::cout << date << " => " << value << " = " << it->second * value << std::endl;
+			else
+				std::cout << date << " => " << value << " = " << (--it)->second * value << std::endl;
 		}
-		catch (const std::invalid_argument &)
+		catch (const std::exception &e)
 		{
-			std::cerr << "Error: Non-numeric value: " << valueStr << std::endl;
-		}
-		catch (const std::out_of_range &)
-		{
-			std::cerr << "Error: Value out of range: " << valueStr << std::endl;
+			std::cerr << e.what() << " : " << valueStr << std::endl;
 		}
 	}
 	inputFile.close();
@@ -140,7 +136,6 @@ int daysInMonth(int month, int year)
 		else
 			return 28;
 	default:
-		std::cerr << "Invalid month" << std::endl;
 		return -1;
 	}
 }
@@ -168,7 +163,5 @@ bool BitcoinExchange::is_valid_date(const std::string &date)
 	int days = daysInMonth(m, y);
 	if (days < 0 || d > days)
 		return false;
-	std::cout << "Date: " << y << "-" << m << "-" << d << std::endl;
-
 	return true;
 }

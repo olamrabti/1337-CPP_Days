@@ -15,9 +15,6 @@ int main(int ac, char *av[])
         {
             std::cerr << e.what() << std::endl;
         }
-        // [ ] Open files, check if empty.
-        // [ ] instantiate the class and pass the file stream (data.csv) to store values in the container
-        // [ ] Display the values
     }
     return 0;
 }
