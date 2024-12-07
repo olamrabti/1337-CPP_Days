@@ -15,30 +15,47 @@ RPN const &RPN::operator=(RPN const &rhs)
 		_numbers = rhs._numbers;
 	return (*this);
 }
-
-void RPN::store_numbers(int ac, char **av)
+void RPN::parse_numbers(const std::string &expr)
 {
-	for (int i = 1; i < ac; i++)
+	int i = 0;
+	std::string s;
+	int start;
+	int num;
+
+	while (expr[i])
 	{
-		const std::string op = av[i];
-		if (op == "+" || op == "-" || op == "*" || op == "/")
-			do_the_math(op[0]);
-		else
+		if (isspace(expr[i]))
 		{
-			int num = std::atoi(op.c_str());
-			_numbers.push(num);
-			std::cout << "number.top : " << _numbers.top() << std::endl;
+			i++;
+			continue;
 		}
+		if (expr[i] == '+' || expr[i] == '-' || expr[i] == '*' || expr[i] == '/')
+			do_the_math(expr[i]);
+		else if (isdigit(expr[i]))
+		{
+			start = i;
+			while (isdigit(expr[i]))
+				i++;
+			s = expr.substr(start, i - start);
+			num = std::atoi(s.c_str());
+			if (num >= 10)
+				throw std::runtime_error("Error: Numbers must be less than 10");
+			_numbers.push(num);
+		}
+		else
+			throw std::runtime_error("Error");
+		i++;
 	}
+	if (!_numbers.empty())
+		std::cout << _numbers.top() << std::endl;
 }
 
 void RPN::do_the_math(char op)
 {
-	std::cout << "op :" << op << std::endl;
 	if (_numbers.size() < 2)
 	{
-		std::cerr << "Error: Not enough numbers for operation " << op << std::endl;
-		return;
+		std::cerr << "Error: ( " << op << " ) ";
+		throw std::runtime_error("Not enough numbers for this operation ");
 	}
 
 	int b = _numbers.top();
@@ -58,17 +75,11 @@ void RPN::do_the_math(char op)
 		_numbers.push(a * b);
 		break;
 	case '/':
-		if (b != 0)
-			_numbers.push(a / b);
-		else
-			std::cerr << "Error: Division by zero" << std::endl;
+		if (b == 0)
+			throw std::runtime_error("Error: Division by zero");
+		_numbers.push(a / b);
 		break;
 	default:
-		std::cerr << "Error: Unknown operator " << op << std::endl;
+		throw std::runtime_error("Error: Invalid operator ");
 	}
-}
-
-int RPN::get_result() const
-{
-	return _numbers.top();
 }

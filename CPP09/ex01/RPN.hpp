@@ -10,10 +10,8 @@ public:
 	RPN(RPN const &copy);
 	~RPN(void);
 	RPN const &operator=(RPN const &rhs);
-
-	void store_numbers(int argc, char **argv);
+	void parse_numbers(const std::string &expression);
 	void do_the_math(char op);
-	int get_result() const;
 };
 
 #endif

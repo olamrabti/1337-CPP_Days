@@ -2,15 +2,21 @@
 
 int main(int ac, char **av)
 {
-    if (ac < 2)
+    if (ac != 2)
     {
-        std::cerr << "Error: Please provide an RPN expression." << std::endl;
+        std::cerr << "Error:  Invalid Input." << std::endl;
         return 1;
     }
 
     RPN rpn;
-    rpn.store_numbers(ac, av);
-    std::cout << "Result: " << rpn.get_result() << std::endl;
+    try
+    {
+        rpn.parse_numbers(av[1]);
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 
     return 0;
 }
