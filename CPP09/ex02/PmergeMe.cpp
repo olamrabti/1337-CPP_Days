@@ -84,20 +84,48 @@ void mergeInsertionSortVector(std::vector<int> &arr)
 	arr = sorted;
 }
 
+bool isValidDouble(const char *str, double *value)
+{
+	char *end;
+	*value = std::strtod(str, &end);
+
+	if (str == end)
+		return false;
+	while (*end != '\0')
+	{
+		if (!std::isspace(*end))
+			return false;
+		++end;
+	}
+	return true;
+}
+
+bool isInteger(double value)
+{
+	return value == std::floor(value);
+}
+
 void parse(int ac, char **av, std::vector<int> &vec)
 {
 
 	for (int i = 1; i < ac; i++)
 	{
-
-		double value = std::atof(av[i]);
-
+		double value;
+		if (!isValidDouble(av[i], &value))
+		{
+			std::cerr << "Error: not a valid number." << std::endl;
+			throw std::runtime_error("");
+		}
+		if (!isInteger(value) || strchr(av[i], '.'))
+		{
+			std::cerr << "Error: not an integer." << std::endl;
+			throw std::runtime_error("");
+		}
 		if (value < 0)
 		{
 			std::cerr << "Error: not a positive number." << std::endl;
 			throw std::runtime_error("");
 		}
-
 		if (value > INT_MAX)
 		{
 			std::cerr << "Error: too large number." << std::endl;
@@ -107,13 +135,13 @@ void parse(int ac, char **av, std::vector<int> &vec)
 	}
 }
 
-void insertSortdeque(std::deque<int> &sorted, int element)
+void insertSortDeque(std::deque<int> &sorted, int element)
 {
 	std::deque<int>::iterator pos = std::lower_bound(sorted.begin(), sorted.end(), element);
 	sorted.insert(pos, element);
 }
 
-void mergeSortdeque(std::deque<int> &arr, std::deque<int> &sorted)
+void mergeSortDeque(std::deque<int> &arr, std::deque<int> &sorted)
 {
 	if (!arr.size())
 		return;
@@ -121,7 +149,7 @@ void mergeSortdeque(std::deque<int> &arr, std::deque<int> &sorted)
 
 	if (arr.size() == 1)
 	{
-		insertSortdeque(sorted, arr[0]);
+		insertSortDeque(sorted, arr[0]);
 		return;
 	}
 	std::deque<int> larger;
@@ -147,11 +175,11 @@ void mergeSortdeque(std::deque<int> &arr, std::deque<int> &sorted)
 		smaller.erase(smaller.begin());
 	}
 	if (!larger.empty())
-		mergeSortdeque(larger, tmpSorted);
+		mergeSortDeque(larger, tmpSorted);
 	if (arr.size() % 2 != 0)
-		insertSortdeque(tmpSorted, unpaired);
+		insertSortDeque(tmpSorted, unpaired);
 	if (!smaller.empty())
-		mergeSortdeque(smaller, tmpSorted);
+		mergeSortDeque(smaller, tmpSorted);
 	std::vector<int> jacob = generateJacobSequence(tmpSorted.size());
 	for (size_t i = 0; i < jacob.size(); i++)
 	{
@@ -159,7 +187,7 @@ void mergeSortdeque(std::deque<int> &arr, std::deque<int> &sorted)
 		{
 			for (size_t j = jacob[i]; tmpSorted.size(); j++)
 			{
-				insertSortdeque(sorted, tmpSorted[jacob[i]]);
+				insertSortDeque(sorted, tmpSorted[jacob[i]]);
 				tmpSorted.erase(tmpSorted.begin() + jacob[i]);
 			}
 		}
@@ -167,12 +195,12 @@ void mergeSortdeque(std::deque<int> &arr, std::deque<int> &sorted)
 	}
 }
 
-void mergeInsertionSortdeque(std::deque<int> &arr)
+void mergeInsertionSortDeque(std::deque<int> &arr)
 {
 	if (arr.size() < 2)
 		return;
 
 	std::deque<int> sorted;
-	mergeSortdeque(arr, sorted);
+	mergeSortDeque(arr, sorted);
 	arr = sorted;
 }

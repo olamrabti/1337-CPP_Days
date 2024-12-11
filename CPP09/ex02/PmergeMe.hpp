@@ -7,13 +7,15 @@
 #include <algorithm>
 #include <ctime>
 #include <exception>
+#include <cstdlib>
+#include <cmath>
 
 void mergeInsertionSortVector(std::vector<int> &arr);
 void mergeSortVector(std::vector<int> &arr, std::vector<int> &sorted);
 void insertSortVector(std::vector<int> &sorted, int element);
-void insertSortdeque(std::deque<int> &sorted, int element);
-void mergeSortdeque(std::deque<int> &arr, std::deque<int> &sorted);
-void mergeInsertionSortdeque(std::deque<int> &arr);
+void insertSortDeque(std::deque<int> &sorted, int element);
+void mergeSortDeque(std::deque<int> &arr, std::deque<int> &sorted);
+void mergeInsertionSortDeque(std::deque<int> &arr);
 std::vector<int> generateJacobSequence(size_t size);
 void parse(int ac, char **av, std::vector<int> &vec);
 template <typename Container>
