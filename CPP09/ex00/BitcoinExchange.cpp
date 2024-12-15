@@ -9,8 +9,6 @@ BitcoinExchange::BitcoinExchange(BitcoinExchange const &src)
 	*this = src;
 }
 
-BitcoinExchange::~BitcoinExchange(void) {}
-
 BitcoinExchange const &BitcoinExchange::operator=(BitcoinExchange const &rhs)
 {
 	if (this != &rhs)
@@ -18,21 +16,31 @@ BitcoinExchange const &BitcoinExchange::operator=(BitcoinExchange const &rhs)
 	return (*this);
 }
 
+BitcoinExchange::~BitcoinExchange(void) {}
+
 void BitcoinExchange::store_data(void)
 {
+
 	std::ifstream data("data.csv");
 	if (data.fail())
 		throw std::runtime_error("Error: Unable to open data.csv file.");
+
+	size_t pos;
+	std::string date;
+	std::string valueStr;
+	double value;
 	std::string line;
+
 	std::getline(data, line);
 	while (std::getline(data, line))
 	{
-		size_t pos = line.find(',');
-		std::string date = line.substr(0, pos);
-		std::string valueStr = line.substr(pos + 1);
-		float value = std::atof(valueStr.c_str());
-		this->_data[date] = value;
+		pos = line.find(',');
+		date = line.substr(0, pos);
+		valueStr = line.substr(pos + 1);
+		value = std::atof(valueStr.c_str());
+		_data[date] = value;
 	}
+
 	data.close();
 }
 
@@ -43,9 +51,10 @@ void BitcoinExchange::print_data() const
 		std::cout << it->first << ": " << it->second << std::endl;
 	}
 }
+
 bool isValidDouble(std::string str, double *value)
 {
-	char *end; // TODO
+	char *end;
 	for (size_t i = 0; !isdigit(str[i]); i++)
 	{
 		if (!(str[i] == '-' || str[i] == '+' || str[i] == '.'))
@@ -53,7 +62,7 @@ bool isValidDouble(std::string str, double *value)
 	}
 	*value = std::strtod(str.c_str(), &end);
 
-	if (str == end)
+	if (str.c_str() == end)
 		return false;
 	while (*end != '\0')
 	{
@@ -73,10 +82,13 @@ void BitcoinExchange::process_input_file(const std::string &filename)
 
 	if (inputFile.fail())
 		throw std::runtime_error("Error: Unable to open input file.");
+
 	std::string line;
 	std::getline(inputFile, line);
+
 	if (line != "date | value")
 		throw std::runtime_error("Error: Invalid Header (date | value).");
+
 	while (std::getline(inputFile, line))
 	{
 		std::istringstream lineStream(line);
@@ -85,6 +97,7 @@ void BitcoinExchange::process_input_file(const std::string &filename)
 			std::cerr << "Error: bad input => " << line << std::endl;
 			continue;
 		}
+		date.erase(date.end() - 1);
 		if (!is_valid_date(date))
 		{
 			std::cerr << "Error: bad input => " << line << std::endl;
@@ -116,10 +129,10 @@ void BitcoinExchange::process_input_file(const std::string &filename)
 		std::map<std::string, double>::iterator it = _data.lower_bound(date);
 		if (it == _data.end())
 			std::cout << date << " => " << value << " = " << (--it)->second * value << std::endl;
-		else if (it != _data.end())
-			std::cout << date << " => " << value << " = " << it->second * value << std::endl;
-		else
+		else if (it == _data.begin() && date != "2009-01-02")
 			std::cout << date << " => " << value << " = No exchange rate for this date" << std::endl;
+		else
+			std::cout << date << " => " << value << " = " << it->second * value << std::endl;
 	}
 	inputFile.close();
 }
@@ -161,9 +174,8 @@ bool BitcoinExchange::is_valid_date(std::string &date)
 	double y = 0;
 	double m = 0;
 	double d = 0;
-	if (!date.empty() && date.back() == ' ')
-		date.erase(date.size() - 1);
 	int count = 0;
+
 	for (size_t i = 0; i < date.size(); i++)
 	{
 		if (date[i] == '-')
@@ -172,8 +184,10 @@ bool BitcoinExchange::is_valid_date(std::string &date)
 			if (!isdigit(date[i]) && date[i] != '-')
 				return false;
 	}
+
 	if (count > 2)
 		return false;
+
 	std::istringstream dateStream(date);
 	std::string tmp;
 

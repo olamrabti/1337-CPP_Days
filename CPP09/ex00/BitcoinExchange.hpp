@@ -8,12 +8,13 @@
 class BitcoinExchange
 {
 private:
-public:
 	std::map<std::string, double> _data;
+
+public:
 	BitcoinExchange(void);
-	BitcoinExchange(BitcoinExchange const &copy);
-	~BitcoinExchange(void);
+	BitcoinExchange(BitcoinExchange const &src);
 	BitcoinExchange const &operator=(BitcoinExchange const &rhs);
+	~BitcoinExchange(void);
 	void store_data(void);
 	void print_data() const;
 	bool is_valid_date(std::string &date);
