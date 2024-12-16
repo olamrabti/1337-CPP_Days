@@ -60,20 +60,19 @@ void mergeSortVector(std::vector<int> &arr, std::vector<int> &sorted)
 	if (!smaller.empty())
 		mergeSortVector(smaller, tmpSorted);
 	std::vector<int> jacob = generateJacobSequence(tmpSorted.size());
+
 	for (size_t i = 0; i < jacob.size(); i++)
 	{
-		if (jacob[i] < static_cast<int>(tmpSorted.size()))
+		if (static_cast<size_t>(jacob[i]) < tmpSorted.size())
 		{
-			for (size_t j = jacob[i]; tmpSorted.size(); j++)
-			{
-				insertSortVector(sorted, tmpSorted[jacob[i]]);
-				tmpSorted.erase(tmpSorted.begin() + jacob[i]);
-			}
+			insertSortVector(sorted, tmpSorted[jacob[i]]);
+			tmpSorted.erase(tmpSorted.begin() + jacob[i]);
+			jacob = generateJacobSequence(tmpSorted.size());
 		}
-		jacob = generateJacobSequence(tmpSorted.size());
 	}
+	for (size_t i = 0; i < tmpSorted.size(); i++)
+		insertSortVector(sorted, tmpSorted[i]);
 }
-
 void mergeInsertionSortVector(std::vector<int> &arr)
 {
 	if (arr.size() < 2)
@@ -183,16 +182,15 @@ void mergeSortDeque(std::deque<int> &arr, std::deque<int> &sorted)
 	std::vector<int> jacob = generateJacobSequence(tmpSorted.size());
 	for (size_t i = 0; i < jacob.size(); i++)
 	{
-		if (jacob[i] < static_cast<int>(tmpSorted.size()))
+		if (static_cast<size_t>(jacob[i]) < tmpSorted.size())
 		{
-			for (size_t j = jacob[i]; tmpSorted.size(); j++)
-			{
-				insertSortDeque(sorted, tmpSorted[jacob[i]]);
-				tmpSorted.erase(tmpSorted.begin() + jacob[i]);
-			}
+			insertSortDeque(sorted, tmpSorted[jacob[i]]);
+			tmpSorted.erase(tmpSorted.begin() + jacob[i]);
+			jacob = generateJacobSequence(tmpSorted.size());
 		}
-		jacob = generateJacobSequence(tmpSorted.size());
 	}
+	for (size_t i = 0; i < tmpSorted.size(); i++)
+		insertSortDeque(sorted, tmpSorted[i]);
 }
 
 void mergeInsertionSortDeque(std::deque<int> &arr)

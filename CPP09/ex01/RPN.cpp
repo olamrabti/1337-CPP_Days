@@ -15,6 +15,7 @@ RPN const &RPN::operator=(RPN const &rhs)
 		_numbers = rhs._numbers;
 	return (*this);
 }
+
 void RPN::parse_numbers(const std::string &expr)
 {
 	int i = 0;
@@ -36,10 +37,10 @@ void RPN::parse_numbers(const std::string &expr)
 			start = i;
 			while (isdigit(expr[i]))
 				i++;
+			if (i - start >= 2)
+				throw std::runtime_error("Error: Numbers must be less than 10");
 			s = expr.substr(start, i - start);
 			num = std::atoi(s.c_str());
-			if (num >= 10)
-				throw std::runtime_error("Error: Numbers must be less than 10");
 			_numbers.push(num);
 		}
 		else
@@ -80,6 +81,6 @@ void RPN::do_the_math(char op)
 		_numbers.push(a / b);
 		break;
 	default:
-		throw std::runtime_error("Error: Invalid operator ");
+		throw std::runtime_error("Error: Invalid operator");
 	}
 }

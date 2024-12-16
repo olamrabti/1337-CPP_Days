@@ -5,8 +5,10 @@
 
 class RPN
 {
-public:
+private:
 	std::stack<int> _numbers;
+
+public:
 	RPN(void);
 	RPN(RPN const &src);
 	RPN const &operator=(RPN const &rhs);

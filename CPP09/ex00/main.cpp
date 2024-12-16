@@ -8,7 +8,6 @@ int main(int ac, char *av[])
         {
             BitcoinExchange operation;
             operation.store_data();
-            // operation.print_data();
             operation.process_input_file(av[1]);
         }
         catch (std::exception const &e)

@@ -130,7 +130,7 @@ void BitcoinExchange::process_input_file(const std::string &filename)
 		if (it == _data.end())
 			std::cout << date << " => " << value << " = " << (--it)->second * value << std::endl;
 		else if (it == _data.begin() && date != "2009-01-02")
-			std::cout << date << " => " << value << " = No exchange rate for this date" << std::endl;
+			std::cerr << date << " => " << value << " = No exchange rate for this date" << std::endl;
 		else
 			std::cout << date << " => " << value << " = " << it->second * value << std::endl;
 	}
